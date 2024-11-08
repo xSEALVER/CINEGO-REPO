@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Films{% endblock %}
+
+{% block body %}
+    <h1 class="text-white mb-6 text-2xl font-bold">Movies</h1>
+    <div class="film-list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for film in films %}
+            <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+                <div class="relative">
+                    <img src="{{ film.urlImage }}" alt="{{ film.titre }}" class="w-full h-56 object-cover">
+                    <div class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">HD</div>
+                </div>
+                <div class="p-4">
+                    <h2 class="text-white text-lg font-semibold">{{ film.titre }}</h2>
+                    <p class="text-gray-400 text-sm mt-1">Release Date: {{ film.dateSortie|date('Y') }}</p>
+                    <p class="text-gray-400 text-sm">Duration: {{ film.duration }}</p>
+                    <p class="text-gray-400 text-sm">Price: {{ film.price }} €</p>
+                    <p class="text-gray-400 text-sm">Genre: {{ film.genre }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+     <script>
+    // Function to open modal by index
+    function openModal(index) {
+        const modal = document.getElementById('modal-' + index);
+        modal.classList.remove('hidden');
+        modal.classList.add('fade-in');
+    }
+
+    // Function to close modal by index
+    function closeModal(index) {
+        const modal = document.getElementById('modal-' + index);
+        modal.classList.add('fade-out');
+        
+        // Delay hiding the modal to allow fade-out animation to complete
+        setTimeout(function() {
+            modal.classList.add('hidden');
+            modal.classList.remove('fade-out');
+        }, 300); // Fade-out duration (in ms)
+    }
+
+    // Close the modal when clicking outside the modal content
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            const index = e.target.dataset.index;
+            closeModal(index);
+        }
+    });
+
+    // Fade-in and fade-out animations (you can adjust the timing and effects)
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .fade-in {
+                animation: fadeIn 0.3s ease-in-out;
+            }
+            .fade-out {
+                animation: fadeOut 0.3s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>
+{% endblock %}
+
+
