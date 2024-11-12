@@ -11,14 +11,18 @@ class FilmController extends AbstractController
 {
     #[Route('/films', name: 'app_films')]
     public function index(FilmRepository $filmRepository): Response
-    {
-        // Fetch films from the database
-        $films = $filmRepository->findAll();
+{
+    $films = $filmRepository->findAll(); // Should return an array of Film objects
 
-        // Pass films to the template
-        return $this->render('film/index.html.twig', [
-            'films' => $films
-        ]);
+    // Ensure $films is iterable
+    if (!is_iterable($films)) {
+        $films = []; // Set as an empty array if it's not iterable
     }
+
+    return $this->render('film/index.html.twig', [
+        'films' => $films,
+    ]);
+}
+
 }
 

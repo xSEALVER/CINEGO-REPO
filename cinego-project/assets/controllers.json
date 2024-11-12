@@ -9,7 +9,8 @@
                 "enabled": false,
                 "fetch": "eager"
             }
-        }
+        },
+        "stimulus": "./assets/controllers/stimulus_controller.js"
     },
     "entrypoints": []
 }

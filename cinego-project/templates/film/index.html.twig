@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Films{% endblock %}
 
@@ -6,20 +6,20 @@
     <h1 class="text-white mb-6 text-2xl font-bold">Movies</h1>
     <div class="film-list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {% for film in films %}
-            <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
-                <div class="relative">
-                    <img src="{{ film.urlImage }}" alt="{{ film.titre }}" class="w-full h-56 object-cover">
-                    <div class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">HD</div>
-                </div>
-                <div class="p-4">
-                    <h2 class="text-white text-lg font-semibold">{{ film.titre }}</h2>
-                    <p class="text-gray-400 text-sm mt-1">Release Date: {{ film.dateSortie|date('Y') }}</p>
-                    <p class="text-gray-400 text-sm">Duration: {{ film.duration }}</p>
-                    <p class="text-gray-400 text-sm">Price: {{ film.price }} €</p>
-                    <p class="text-gray-400 text-sm">Genre: {{ film.genre }}</p>
-                </div>
+        <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+            <div class="relative">
+                <img src="{{ film.urlImage }}" alt="{{ film.titre }}" class="w-full h-56 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">HD</div>
             </div>
-        {% endfor %}
+            <div class="p-4">
+                <h2 class="text-white text-lg font-semibold">{{ film.titre }}</h2>
+                <p class="text-gray-400 text-sm mt-1">Release Date: {{ film.dateSortie|date('Y') }}</p>
+                <p class="text-gray-400 text-sm">Duration: {{ film.duration }}</p>
+                <p class="text-gray-400 text-sm">Price: {{ film.price }} €</p>
+                <p class="text-gray-400 text-sm">Genre: {{ film.genre }}</p>
+            </div>
+        </div>
+    {% endfor %}
     </div>
 
      <script>
@@ -72,6 +72,76 @@
         document.head.appendChild(style);
     });
 </script>
-{% endblock %}
+{% endblock %} #}
+
+
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block body %}
+    <h1 class="text-white mb-6 text-2xl font-bold">Movies</h1>
+    {% if films is iterable %}
+        <div class="film-list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for film in films %}
+                <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+                    <div class="relative">
+                        <img src="{{ film.urlImage}}" 
+                             alt="{{ film.titre }}" 
+                             class="w-full h-60 object-cover">
+                             
+                        <span class="absolute top-2 left-2 bg-black text-white text-xs font-semibold px-2 py-1 rounded">HD</span>
+                    </div>
+                    <div class="p-4">
+                        <h2 class="text-white text-lg font-bold truncate">{{ film.titre }}</h2>
+                        <p class="text-gray-400 text-sm mb-2">{{ film.genre }}</p>
+                        <p class="text-gray-300 text-xs">{{ film.dateSortie|date('Y') }}</p>
+                        <p class="text-teal-400 text-base font-semibold mt-2">${{ film.price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %} #}
+
+{# {% for film in films %}
+   <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+            <div class="relative">
+                    <img src="{{ film.urlImage}}" 
+                    alt="{{ film.titre }}" 
+                    class="w-full h-60 object-cover">      
+                    <span class="absolute top-2 left-2 bg-black text-white text-xs font-semibold px-2 py-1 rounded">HD</span>
+            </div>
+            <div class="p-4">
+                    <h2 class="text-white text-lg font-bold truncate">{{ film.titre }}</h2>
+                    <p class="text-gray-400 text-sm mb-2">{{ film.genre }}</p>
+                    <p class="text-gray-300 text-xs">{{ film.dateSortie|date('Y') }}</p>
+                    <p class="text-teal-400 text-base font-semibold mt-2">${{ film.price }}</p>
+            </div>
+    </div>
+{% else %}
+    <p>No films found.</p>
+{% endfor %} #}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {% for film in films %}
+        <div class="film-item bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+            <div class="relative">
+                <img src="{{ film.urlImage }}" 
+                     alt="{{ film.titre }}" 
+                     class="w-full h-60 object-cover">      
+                <span class="absolute top-2 left-2 bg-black text-white text-xs font-semibold px-2 py-1 rounded">HD</span>
+            </div>
+            <div class="p-4">
+                <h2 class="text-white text-lg font-bold truncate">{{ film.titre }}</h2>
+                <p class="text-gray-400 text-sm mb-2">{{ film.genre }}</p>
+                <p class="text-gray-300 text-xs">{{ film.dateSortie|date('Y') }}</p>
+                <p class="text-teal-400 text-base font-semibold mt-2">${{ film.price }}</p>
+            </div>
+        </div>
+    {% else %}
+        <p>No films found.</p>
+    {% endfor %}
+</div>
+
 
 
